@@ -1,0 +1,142 @@
+##############################################################################
+# ██╗  ██╗███████╗██╗   ██╗███████╗
+# ██║ ██╔╝██╔════╝╚██╗ ██╔╝██╔════╝
+# █████╔╝ █████╗   ╚████╔╝ ███████╗
+# ██╔═██╗ ██╔══╝    ╚██╔╝  ╚════██║
+# ██║  ██╗███████╗   ██║   ███████║
+# ╚═╝  ╚═╝╚══════╝   ╚═╝   ╚══════╝
+##############################################################################
+
+export KEY_RIGHT=$'^[[C'               
+export KEY_LEFT=$'^[[D'    
+
+export KEY_SHIFT_RIGHT=$'^[[1;2C'      
+export KEY_SHIFT_LEFT=$'^[[1;2D'       
+export KEY_SHIFT_CTRL_RIGHT=$'^[[1;6C' 
+export KEY_SHIFT_CTRL_LEFT=$'^[[1;6D'  
+
+export KEY_HOME=$'^[[H'                
+export KEY_END=$'^[[F'                 
+
+export KEY_SHIFT_HOME=$'^[[1;2H'                
+export KEY_SHIFT_END=$'^[[1;2F'                
+
+
+export KEY_DELETE=$'^[[3~'             
+export KEY_BS=$'^?'                    
+
+export KEY_CTRL_DELETE='^[[3;5~'        
+export KEY_CTRL_BS=$'^H'               
+
+export KEY_CTRL_A='^A'                 
+export KEY_CTRL_V='^V'                 
+export KEY_CTRL_X='^X'                 
+export KEY_CTRL_Z='^Z'                 
+
+export KEY_CTRL_RIGHT='^[[1;5C'        
+export KEY_CTRL_LEFT='^[[1;5D'         
+
+
+##############################################################################
+# ███████╗██╗   ██╗███╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗
+# ██╔════╝██║   ██║████╗  ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║
+# █████╗  ██║   ██║██╔██╗ ██║██║        ██║   ██║██║   ██║██╔██╗ ██║
+# ██╔══╝  ██║   ██║██║╚██╗██║██║        ██║   ██║██║   ██║██║╚██╗██║
+# ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║
+# ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+##############################################################################                                             
+
+zle -N widget::paste
+function widget::paste() {
+    ((REGION_ACTIVE)) && zle kill-region
+    local pasted_text="$(cliphist list | head -n 1 | cliphist decode | wl-copy)"
+    local pasted_text="$(wl-paste)"
+    RBUFFER="${pasted_text}${RBUFFER}"
+    CURSOR=$(( CURSOR + ${#pasted_text} ))
+}
+
+zle -N widget::cut
+function widget::cut() {
+    if (( REGION_ACTIVE )); then
+        zle kill-region
+        wl-copy "$CUTBUFFER"
+    fi
+}
+
+zle -N widget::select-all
+function widget::select-all() {
+    CURSOR=${#BUFFER}
+    zle set-mark-command
+    zle beginning-of-line
+}
+
+function widget::util-select() {
+    (( REGION_ACTIVE )) || zle set-mark-command
+    local widget_name=$1
+    shift
+    zle $widget_name -- "$@"
+}
+
+function widget::util-unselect() {
+    REGION_ACTIVE=0
+    local widget_name=$1
+    shift
+    zle $widget_name -- "$@"
+}
+
+function widget::util-delselect() {
+    if ((REGION_ACTIVE)) then
+        zle kill-region
+    else
+        local widget_name=$1
+        shift
+        zle $widget_name -- $@
+    fi
+}
+
+##############################################################################
+# ██████╗ ██╗███╗   ██╗██████╗ ██╗███╗   ██╗ ██████╗ ███████╗
+# ██╔══██╗██║████╗  ██║██╔══██╗██║████╗  ██║██╔════╝ ██╔════╝
+# ██████╔╝██║██╔██╗ ██║██║  ██║██║██╔██╗ ██║██║  ███╗███████╗
+# ██╔══██╗██║██║╚██╗██║██║  ██║██║██║╚██╗██║██║   ██║╚════██║
+# ██████╔╝██║██║ ╚████║██████╔╝██║██║ ╚████║╚██████╔╝███████║
+# ╚═════╝ ╚═╝╚═╝  ╚═══╝╚═════╝ ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝
+##############################################################################
+
+bindkey -r "^X^X"
+bindkey $KEY_CTRL_BS backward-kill-word
+bindkey $KEY_CTRL_DELETE kill-word
+bindkey $KEY_CTRL_A widget::select-all
+bindkey $KEY_CTRL_V widget::paste
+bindkey $KEY_CTRL_X widget::cut
+bindkey $KEY_CTRL_Z undo
+bindkey $KEY_CTRL_RIGHT forward-word
+bindkey $KEY_CTRL_LEFT backward-word
+
+for keyname kcap seq mode widget (
+    left kcub1 $KEY_LEFT unselect backward-char
+    right kcuf1 $KEY_RIGHT unselect forward-char
+    
+    shift-ctrl-right sctrr $KEY_SHIFT_CTRL_RIGHT select forward-word
+    shift-ctrl-left sctrl $KEY_SHIFT_CTRL_LEFT select backward-word
+    shift-right kRIT $KEY_SHIFT_RIGHT select forward-char
+    shift-left kLFT $KEY_SHIFT_LEFT select backward-char
+    
+    shift-home sHOME $KEY_SHIFT_HOME select beginning-of-line
+    shift-end sEND $KEY_SHIFT_END select end-of-line
+
+    home home $KEY_HOME unselect beginning-of-line
+    kend end $KEY_END unselect end-of-line
+
+    del x $KEY_DELETE delselect delete-char
+    backspace x $KEY_BS delselect backward-delete-char
+)
+{
+    eval "function widget::key-$keyname() {
+        widget::util-$mode $widget \"\$@\"
+    }"
+
+    zle -N widget::key-$keyname
+    bindkey "$seq" widget::key-$keyname
+}
+

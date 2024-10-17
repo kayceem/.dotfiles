@@ -1,0 +1,7 @@
+[credential]
+	helper = store
+[init]
+	defaultBranch = main
+[user]
+	email = ghstkayc@gmail.com
+	name = kayc

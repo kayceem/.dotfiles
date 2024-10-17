@@ -27,6 +27,10 @@ alias off='shutdown -h'
 alias hkey='sudo libinput debug-events'
 alias f='find . -iname'
 
+alias -g G='| grep'
+alias -g W='| wc -l'
+alias -g C='| wl-copy'
+
 alias c='clear'
 alias nf='fastfetch'
 alias ff='fastfetch'
@@ -52,6 +56,7 @@ alias in='$aurhelper -S'
 alias ins='$aurhelper -Qi'
 alias pl='$aurhelper -Qs' 
 alias pa='$aurhelper -Ss'
+alias pf='$aurhelper -F'
 alias pc='$aurhelper -Sc' 
 
 type starship_zle-keymap-select >/dev/null || \

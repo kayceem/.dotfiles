@@ -40,6 +40,11 @@ alias off='shutdown -h'
 alias hkey='sudo libinput debug-events'
 	
 
+alias sys='systemctl'
+alias stat='systemctl status'
+alias statu='systemctl --user status'
+
+
 alias c='clear'
 alias nf='fastfetch'
 alias ch='~/.config/hypr/hyprland.conf'
@@ -48,7 +53,6 @@ alias cd='z'
 alias cdi='zi'
 alias b='z -'
 alias n='z +'
-alias sys='systemctl'
 alias pms='sudo pacman'
 alias e='sudo nano ~/.zshrc'
 alias ec='sudo nano ~/.zshrc_config'

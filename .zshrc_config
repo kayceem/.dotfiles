@@ -12,6 +12,8 @@ export KEY_LEFT=$'^[[D'
 
 export KEY_SHIFT_RIGHT=$'^[[1;2C'      
 export KEY_SHIFT_LEFT=$'^[[1;2D'       
+export KEY_SHIFT_UP=$'^[[1;2A'       
+export KEY_SHIFT_DOWN=$'^[[1;2B'       
 export KEY_SHIFT_CTRL_RIGHT=$'^[[1;6C' 
 export KEY_SHIFT_CTRL_LEFT=$'^[[1;6D'  
 
@@ -121,7 +123,10 @@ for keyname kcap seq mode widget (
     shift-ctrl-left sctrl $KEY_SHIFT_CTRL_LEFT select backward-word
     shift-right kRIT $KEY_SHIFT_RIGHT select forward-char
     shift-left kLFT $KEY_SHIFT_LEFT select backward-char
-    
+
+    shift-up       kri    $KEY_SHIFT_UP         unselect      up-line-or-history
+    shift-down     kind   $KEY_SHIFT_DOWN       unselect      down-line-or-history    
+   
     shift-home sHOME $KEY_SHIFT_HOME select beginning-of-line
     shift-end sEND $KEY_SHIFT_END select end-of-line
 

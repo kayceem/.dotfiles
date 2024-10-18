@@ -13,6 +13,19 @@ mcd() {
     mkdir -p "$1" && cd "$1"
 }
 
+ff() {
+  find . -path "./.cache" -prune -o -regex ".*$1.*"
+}
+
+fd() {
+  find . -path "./.cache" -prune -o -type d -regex ".*$1.*"
+}
+
+alias -g su='sudo'
+alias -g G='| grep'
+alias -g W='| wc -l'
+alias -g C='| wl-copy'
+
 
 alias key='showkey -a'
 alias l='eza -lh --icons=auto'
@@ -25,15 +38,10 @@ alias md='mkdir'
 alias off='shutdown -h'
 
 alias hkey='sudo libinput debug-events'
-alias f='find . -iname'
-
-alias -g G='| grep'
-alias -g W='| wc -l'
-alias -g C='| wl-copy'
+	
 
 alias c='clear'
 alias nf='fastfetch'
-alias ff='fastfetch'
 alias ch='~/.config/hypr/hyprland.conf'
 alias sn='sudo nano'
 alias cd='z'

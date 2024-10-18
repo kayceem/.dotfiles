@@ -8,7 +8,9 @@ setopt SHARE_HISTORY
 setopt HIST_IGNORE_DUPS
 
 export EDITOR=nano
-
+export DF="/home/kayc/.dotfiles"
+export CF="/home/kayc/.config"
+	
 mcd() {
     mkdir -p "$1" && cd "$1"
 }
@@ -20,6 +22,10 @@ ff() {
 fd() {
   find . -path "./.cache" -prune -o -type d -regex ".*$1.*"
 }
+
+alias ..="cd .."
+alias ...="cd .. && cd .."
+
 
 alias -g su='sudo'
 alias -g G='| grep'
@@ -41,6 +47,7 @@ alias hkey='sudo libinput debug-events'
 	
 
 alias sys='systemctl'
+alias sysu='systemctl --user'
 alias stat='systemctl status'
 alias statu='systemctl --user status'
 

@@ -10,6 +10,7 @@ setopt HIST_IGNORE_DUPS
 export EDITOR=nano
 export DF="/home/kayc/.dotfiles"
 export CF="/home/kayc/.config"
+export NSXIV_OPTS="/home/kayc/Misc/Wallpapers"
 	
 mcd() {
     mkdir -p "$1" && cd "$1"
@@ -33,6 +34,7 @@ alias -g W='| wc -l'
 alias -g C='| wl-copy'
 
 
+alias iv='nsxiv -o'
 alias key='showkey -a'
 alias l='eza -lh --icons=auto'
 alias ls='eza -1 --icons=auto'
@@ -55,11 +57,11 @@ alias statu='systemctl --user status'
 alias c='clear'
 alias nf='fastfetch'
 alias ch='~/.config/hypr/hyprland.conf'
+alias n='nano'
 alias sn='sudo nano'
 alias cd='z'
 alias cdi='zi'
 alias b='z -'
-alias n='z +'
 alias pms='sudo pacman'
 alias e='sudo nano ~/.zshrc'
 alias ec='sudo nano ~/.zshrc_config'
@@ -85,4 +87,4 @@ type starship_zle-keymap-select >/dev/null || \
 
 eval "$(zoxide init zsh)"
 
-pokemon-colorscripts -r 1,2,3,4
+pokemon-colorscripts --no-title -r 1,2,3,4,5,6,7

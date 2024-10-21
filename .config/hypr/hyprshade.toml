@@ -6,6 +6,6 @@ name = "vibrance"
 default = true
 
 [[shades]]
-name = "blue-light-filter"
+name = "blue-light-filter-custom"
 start_time = 16:00:00
 end_time = 06:00:00

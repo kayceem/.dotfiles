@@ -29,9 +29,9 @@ rotate() {
 }
 
 case "$1" in
-"w")        while read file; do swwwallpaper.sh -s "$(pwd)/$file" &> /dev/null; done ;;
+"w")        while read file; do swwwallpaper.sh -s $(realpath "$file") &> /dev/null; done ;;
 "c")      	while read file; do wl-copy < "$file"; done ;;
-"x")      	while read file; do echo "$(pwd)/$file" | wl-copy;  done ;;
+"x")      	while read file; do echo $(realpath "$file") | wl-copy;  done ;;
 "comma")  	rotate 270 ;;
 "period") 	rotate  90 ;;
 "slash")  	rotate 180 ;;

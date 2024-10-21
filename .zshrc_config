@@ -31,6 +31,8 @@ export KEY_CTRL_DELETE='^[[3;5~'
 export KEY_CTRL_BS=$'^H'               
 
 export KEY_CTRL_A='^A'                 
+export KEY_CTRL_C='^C'                 
+export KEY_CTRL_S='^S'                 
 export KEY_CTRL_V='^V'                 
 export KEY_CTRL_X='^X'                 
 export KEY_CTRL_Z='^Z'                 
@@ -57,12 +59,11 @@ function widget::paste() {
     CURSOR=$(( CURSOR + ${#pasted_text} ))
 }
 
+
 zle -N widget::cut
 function widget::cut() {
-    if (( REGION_ACTIVE )); then
-        zle kill-region
-        wl-copy "$CUTBUFFER"
-    fi
+     (( REGION_ACTIVE )) && zle kill-region
+      wl-copy "$CUTBUFFER"
 }
 
 zle -N widget::select-all
@@ -114,6 +115,7 @@ bindkey $KEY_CTRL_X widget::cut
 bindkey $KEY_CTRL_Z undo
 bindkey $KEY_CTRL_RIGHT forward-word
 bindkey $KEY_CTRL_LEFT backward-word
+bindkey $KEY_CTRL_S fzf-history-widget
 
 for keyname kcap seq mode widget (
     left kcub1 $KEY_LEFT unselect backward-char

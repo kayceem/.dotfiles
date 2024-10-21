@@ -1,4 +1,5 @@
 source ~/.zshrc_config
+source /usr/share/fzf/key-bindings.zsh
 
 HISTSIZE=10000      # Number of commands to remember in the current session
 SAVEHIST=10000     # Number of commands to save in the history file
@@ -6,22 +7,30 @@ HISTFILE=~/.zsh_history  # Path to the history file
 setopt APPEND_HISTORY
 setopt SHARE_HISTORY
 setopt HIST_IGNORE_DUPS
+setopt ignoreeof 	# Remove ctrl+d to exit
 
 export EDITOR=nano
 export DF="/home/kayc/.dotfiles"
 export CF="/home/kayc/.config"
 export NSXIV_OPTS="/home/kayc/Misc/Wallpapers"
+
+stty -ixon
+
 	
 mcd() {
     mkdir -p "$1" && cd "$1"
 }
 
-ff() {
+fs() {
   find . -path "./.cache" -prune -o -regex ".*$1.*"
 }
 
 fd() {
   find . -path "./.cache" -prune -o -type d -regex ".*$1.*"
+}
+
+iv() {
+ nsxiv "$@" "$NSXIV_OPTS" -o
 }
 
 alias ..="cd .."
@@ -33,8 +42,7 @@ alias -g G='| grep'
 alias -g W='| wc -l'
 alias -g C='| wl-copy'
 
-
-alias iv='nsxiv -o'
+alias p='cat'
 alias key='showkey -a'
 alias l='eza -lh --icons=auto'
 alias ls='eza -1 --icons=auto'
@@ -56,15 +64,15 @@ alias statu='systemctl --user status'
 
 alias c='clear'
 alias nf='fastfetch'
-alias ch='~/.config/hypr/hyprland.conf'
+alias ff='fastfetch'
 alias n='nano'
 alias sn='sudo nano'
 alias cd='z'
 alias cdi='zi'
 alias b='z -'
 alias pms='sudo pacman'
-alias e='sudo nano ~/.zshrc'
-alias ec='sudo nano ~/.zshrc_config'
+alias e='nano ~/.zshrc'
+alias ec='nano ~/.zshrc_config'
 alias reload='source ~/.zshrc'
 alias r='source ~/.zshrc'
 alias rr='source ~/.zshrc && clear'
@@ -79,6 +87,37 @@ alias pl='$aurhelper -Qs'
 alias pa='$aurhelper -Ss'
 alias pf='$aurhelper -F'
 alias pc='$aurhelper -Sc' 
+#alias pkg='$aurhelper -Qi | awk '\''/^Name/ {name=$3} /^Install Date/ {print $4, $5, $6, $7, $8, $9, name}'\'' | sort -k3,3r -k2,2n -k1,1M -k7,7 -k6,6'
+pkg() {
+    local date_filter=""
+    local month_filter=""
+
+    while getopts "d:m:" opt; do
+        case $opt in
+            d) date_filter="$OPTARG" ;;
+            m) month_filter="$OPTARG" ;;
+            *) return 1 ;;
+        esac
+    done
+
+    local base_command="$aurhelper -Qi | awk '/^Name/ {name=\$3} /^Install Date/ {print \$4, \$5, \$6, \$7, \$8, \$9, name}'"
+
+    if [[ -n $date_filter ]]; then
+        base_command="$base_command | awk -v date=\"$date_filter\" '\$2 ~ date'"
+    fi
+
+    if [[ -n $month_filter ]]; then
+        base_command="$base_command | awk -v month=\"$month_filter\" '\$3 ~ month'"
+    fi
+
+    result=$(eval "$base_command")
+
+    if [[ -n $result ]]; then
+        echo "$result" | sort -k3,3r -k2,2n -k1,1M -k7,7 -k6,6
+    else
+        echo "No matching packages found."
+    fi
+}
 
 type starship_zle-keymap-select >/dev/null || \
   {
@@ -87,4 +126,4 @@ type starship_zle-keymap-select >/dev/null || \
 
 eval "$(zoxide init zsh)"
 
-pokemon-colorscripts --no-title -r 1,2,3,4,5,6,7
+# pokemon-colorscripts --no-title -r 1,2,3,4,5,6,7

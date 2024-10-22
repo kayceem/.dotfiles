@@ -41,7 +41,7 @@ def format_history(history):
         "text": str(count),
         "alt": alt,
         "tooltip": '\n '.join(tooltip_click) + '\n\n ' + '\n '.join(tooltip),
-        "class": alt
+        "class": "custom-notifications"
     }
     return formatted_history
 

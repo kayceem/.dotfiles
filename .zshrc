@@ -1,4 +1,5 @@
 source ~/.zshrc_config
+source ~/.zshrc_util
 source /usr/share/fzf/key-bindings.zsh
 
 HISTSIZE=10000      # Number of commands to remember in the current session
@@ -39,6 +40,8 @@ alias ...="cd .. && cd .."
 
 alias -g su='sudo'
 alias -g G='| grep'
+alias -g H='| head'
+alias -g T='| tail'
 alias -g W='| wc -l'
 alias -g C='| wl-copy'
 
@@ -73,9 +76,10 @@ alias b='z -'
 alias pms='sudo pacman'
 alias e='nano ~/.zshrc'
 alias ec='nano ~/.zshrc_config'
+alias eu='nano ~/.zshrc_util'
 alias reload='source ~/.zshrc'
 alias r='source ~/.zshrc'
-alias rr='source ~/.zshrc && clear'
+alias rr='clear && source ~/.zshrc'
 
 alias dep='pactree -r'
 aurhelper='yay'
@@ -113,7 +117,7 @@ pkg() {
     result=$(eval "$base_command")
 
     if [[ -n $result ]]; then
-        echo "$result" | sort -k3,3r -k2,2n -k1,1M -k7,7 -k6,6
+        echo "$result" | sort -k3,3r -k2,2n -k1,1M -k6,6 -k5,5
     else
         echo "No matching packages found."
     fi

@@ -62,8 +62,10 @@ function widget::paste() {
 
 zle -N widget::cut
 function widget::cut() {
-     (( REGION_ACTIVE )) && zle kill-region
-      wl-copy "$CUTBUFFER"
+    if (( REGION_ACTIVE )); then
+        zle kill-region
+        echo "$CUTBUFFER" | wl-copy
+    fi
 }
 
 zle -N widget::select-all

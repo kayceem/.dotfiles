@@ -1,0 +1,25 @@
+timer() {
+    local seconds=0
+    local sound_file="/home/kayc/Misc/Sounds/notification.wav"  # Path to the sound file
+
+    # Check for the -s flag
+    if [[ $1 == "-s" ]]; then
+        seconds=$2  # If -s is provided, use the second argument
+    else
+        seconds=$(($1 * 60))  # Convert minutes to seconds
+    fi
+
+    # Validate the input
+    if ! [[ $seconds =~ ^[0-9]+$ ]] || [ "$seconds" -le 0 ]; then
+        echo "Usage: timer [minutes] or timer -s [seconds]"
+        return 1
+    fi
+
+    notify-send "Timer set for $(($seconds / 60)) minutes $((seconds % 60)) seconds."
+
+    setsid bash -c "{
+        sleep \"$seconds\"
+        ffplay -nodisp -autoexit \"$sound_file\"
+        notify-send \"Timer\" \"Time's up!\"
+    }" < /dev/null > /dev/null 2>&1
+}

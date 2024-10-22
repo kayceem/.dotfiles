@@ -17,6 +17,12 @@ $env_var\
 $character"""
 
 ################################################
+[time]
+disabled = true
+format = '[\($time\)]($style) '
+time_format = '%H:%M'
+
+################################################
 [cmd_duration]
 min_time = 100
 

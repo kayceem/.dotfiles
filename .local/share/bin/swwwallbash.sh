@@ -18,7 +18,6 @@ wallbashOut="${dcolDir}/$(set_hash "${wallbashImg}").dcol"
 if [ ! -f "${wallbashOut}" ] ; then
     "${scrDir}/swwwallcache.sh" -w "${wallbashImg}" &> /dev/null
 fi
-
 set -a
 source "${wallbashOut}"
 if [ -f "${hydeThemeDir}/theme.dcol" ] && [ "${enableWallDcol}" -eq 0 ]  ; then

@@ -20,4 +20,4 @@ save_shader
 grimblast --freeze save area "$temp_screenshot" && (tesseract "$temp_screenshot" stdout | wl-copy) && restore_shader
 rm "$temp_screenshot"
 
-notify-send -a "OCR" $'Copied:\n'"$(wl-paste)"
+notify-send -a "OCR" "Copied:" "$(wl-paste)"

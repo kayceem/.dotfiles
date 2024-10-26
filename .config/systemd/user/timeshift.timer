@@ -3,6 +3,7 @@ Description=Daily Timeshift check for snapshots
 Documentation=man:timeshift(1)
 
 [Timer]
+OnBootSec=200
 OnCalendar=daily
 Persistent=true
 

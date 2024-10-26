@@ -1,0 +1,25 @@
+# Locations of the hot corners.
+# Options:
+# - for corners: top_left, top_right, bottom_right, and bottom_left;
+# - for edges: top, bottom, right, left.
+
+[left]
+enter_command = ["eww", "open", "date" ]
+exit_command = ["eww", "close-all" ]
+locations = ["top_left"]  # default
+size = 20  # default
+margin = 40  # default
+timeout_ms = 50  # default
+color = "#FFFF0000"  # default
+
+
+[top_right]
+enter_command = [ "hyprctl", "dispatch", "workspace", "empty" ]
+exit_command = [ "hyprctl", "dispatch", "workspace", "previous" ]
+
+locations = ["top_right"]  # default
+size = 20  # default
+margin = 40  # default
+timeout_ms = 50  # default
+color = "#FFFF0000"  # default
+

@@ -1,6 +1,5 @@
-
 {
-// sourced from header module //
+    // sourced from header module //
 
     "layer": "top",
     "position": "top",
@@ -11,43 +10,87 @@
     "gtk-layer-shell": true,
     "reload_style_on_change": true,
 
+    // positions generated based on config.ctl //
 
-// positions generated based on config.ctl //
+    // "modules-center": ["custom/padd","custom/l_end","cpu","memory","custom/cpuinfo","custom/gpuinfo","custom/r_end","custom/l_end","idle_inhibitor","clock","custom/r_end","custom/padd"],
+    // "modules-left": ["custom/padd","custom/l_end","hyprland/workspaces","hyprland/window","custom/r_end","custom/padd"],
+    // "modules-right": ["custom/padd","custom/l_end","backlight","network","pulseaudio","pulseaudio#microphone","custom/updates","custom/keybindhint","custom/r_end","custom/l_end","privacy","tray","battery","custom/r_end","custom/l_end","custom/wallchange","custom/theme","custom/wbar","custom/cliphist","custom/power","custom/r_end","custom/padd"],
+    "modules-center": [
+        "custom/padd",
+        "custom/l_end",
+        "idle_inhibitor",
+        "clock",
+        "cava",
+        "custom/r_end",
+        "custom/padd"
+    ],
+    "modules-left": [
+        "custom/padd",
+        "custom/l_end",
+        "hyprland/workspaces",
+        "hyprland/window",
+        "custom/r_end",
+        "custom/l_end",
+        "custom/powerprofiles",
+        "custom/supergfx",
+        "custom/r_end",
+        "custom/padd"
+    ],
+    "modules-right": [
+        "custom/padd",
+        "custom/l_end",
+        "custom/spotify",
+        "backlight",
+        "pulseaudio",
+        "pulseaudio#microphone",
+        "custom/notifications",
+        "custom/r_end",
+        "custom/l_end",
+        "privacy",
+        "tray",
+        "battery",
+        "custom/r_end",
+        "custom/l_end",
+        "custom/cliphist",
+        "custom/power",
+        "custom/r_end",
+        "custom/padd"
+    ],
 
-	// "modules-center": ["custom/padd","custom/l_end","cpu","memory","custom/cpuinfo","custom/gpuinfo","custom/r_end","custom/l_end","idle_inhibitor","clock","custom/r_end","custom/padd"],
-	// "modules-left": ["custom/padd","custom/l_end","hyprland/workspaces","hyprland/window","custom/r_end","custom/padd"],
-	// "modules-right": ["custom/padd","custom/l_end","backlight","network","pulseaudio","pulseaudio#microphone","custom/updates","custom/keybindhint","custom/r_end","custom/l_end","privacy","tray","battery","custom/r_end","custom/l_end","custom/wallchange","custom/theme","custom/wbar","custom/cliphist","custom/power","custom/r_end","custom/padd"],
-	"modules-center": ["custom/padd","custom/l_end","idle_inhibitor","clock","custom/r_end","custom/padd"],
-	"modules-left": ["custom/padd","custom/l_end","hyprland/workspaces","hyprland/window","custom/r_end","custom/padd"],
-	"modules-right": ["custom/padd","custom/l_end","custom/powerprofiles","custom/supergfx","custom/r_end","custom/l_end","custom/spotify","backlight","pulseaudio","pulseaudio#microphone","custom/notifications","custom/r_end","custom/l_end","privacy","tray","battery","custom/r_end","custom/l_end","custom/cliphist","custom/power","custom/r_end","custom/padd"],
+    // sourced from modules based on config.ctl //
+    "custom/supergfx": {
+        "format": "{}",
+        "return-type": "json",
+        "interval": 5,
+        "exec": "gpustate.sh",
+        "menu": "on-click",
+        "menu-file": "/home/kayc/.config/waybar/gfx_menu.xml",
+        "menu-actions": {
+            "Integrated": "changegpustate.sh -i",
+            "Hybrid": "changegpustate.sh -h"
+        }
+    },
 
+    "custom/powerprofiles": {
+        "format": "{} |",
+        "return-type": "json",
+        "interval": 5,
+        "exec": "powerprofiles.sh",
+        "menu": "on-click",
+        "menu-file": "/home/kayc/.config/waybar/powerprofiles_menu.xml",
+        "menu-actions": {
+            "Performance": "changepowerprofile.sh -p",
+            "Balanced": "changepowerprofile.sh -b",
+            "Power-Saver": "changepowerprofile.sh -s"
+        }
+    },
 
-// sourced from modules based on config.ctl //
-"custom/supergfx": {
-      "format": "{}",
-      "return-type": "json",
-      "interval": 5,
-      "exec": "gpustate.sh",
-      "menu": "on-click",
-		  "menu-file": "/home/kayc/.config/waybar/gfx_menu.xml",
-      "menu-actions": {
-			  "Integrated": "changegpustate.sh -i",
-			  "Hybrid": "changegpustate.sh -h"
-		  }
-},
-"custom/powerprofiles": {
-      "format": "{} |",
-      "return-type": "json",
-      "interval": 5,
-      "exec": "powerprofiles.sh",
-      "menu": "on-click",
-		  "menu-file": "/home/kayc/.config/waybar/powerprofiles_menu.xml",
-      "menu-actions": {
-              "Performance": "changepowerprofile.sh -p",
-			  "Balanced": "changepowerprofile.sh -b",
-			  "Power-Saver": "changepowerprofile.sh -s"
-		  }
-},
+    "custom/cava": {
+        "format": "{}",
+        "exec": "waybar_cava.sh --width 20",
+        "restart-interval": 1,
+        "hide-empty": true
+    },
 
     "cpu": {
         "interval": 10,
@@ -61,7 +104,7 @@
         "states": {
             "c": 90, // critical
             "h": 60, // high
-            "m": 30, // medium
+            "m": 30 // medium
         },
         "interval": 30,
         "format": "󰾆 {used}GB",
@@ -113,7 +156,7 @@
         "rotate": 0,
         "interval": 5, // once every 5 seconds
         "tooltip": true,
-        "max-length": 1000,
+        "max-length": 1000
     },
 
     "custom/gpuinfo#intel": {
@@ -123,7 +166,7 @@
         "rotate": 0,
         "interval": 5, // once every 5 seconds
         "tooltip": true,
-        "max-length": 1000,
+        "max-length": 1000
     },
 
     "idle_inhibitor": {
@@ -136,10 +179,10 @@
     },
 
     "clock": {
-        "format": "{:%H:%M %p  󰃭 }",
+        "format": "{:%H:%M 󰃭 }",
         "rotate": 0,
         "format-alt": "{:%R %d·%m·%y}",
-        "tooltip-format": "<span>{calendar}</span>",
+        "tooltip-format": "<span size=\"xx-large\"><big>{:%H:%M}</big>\n{calendar}</span>",
         "calendar": {
             "mode": "month",
             "mode-mon-col": 2,
@@ -169,8 +212,7 @@
         "show-special": true,
         // "on-scroll-up": "hyprctl dispatch workspace -1",
         // "on-scroll-down": "hyprctl dispatch workspace +1",
-        "persistent-workspaces": {
-        }
+        "persistent-workspaces": {}
     },
 
     "hyprland/window": {
@@ -211,43 +253,43 @@
         "format-disconnected": "󰖪 ",
         "tooltip-format-disconnected": "Disconnected",
         "format-alt": "<span foreground='#99ffdd'> {bandwidthDownBytes}</span> <span foreground='#ffcc66'> {bandwidthUpBytes}</span>",
-        "interval": 2,
+        "interval": 2
     },
 
-"pulseaudio": {
-    "format": "{icon} {volume}",
-    "rotate": 0,
-    "format-muted": "婢",
-    "on-click": "volumecontrol.sh -o m", 
-    "on-click-right": "pavucontrol -t 3", 
-    "on-click-middle": "volumecontrol.sh -s ''",
-    "on-scroll-up": "volumecontrol.sh -o i",
-    "on-scroll-down": "volumecontrol.sh -o d",
-    "tooltip-format": "{icon} {desc} // {volume}%",
-    "scroll-step": 5,
-    "format-icons": {
-        "headphone": "",
-        "hands-free": "",
-        "headset": "",
-        "phone": "",
-        "portable": "",
-        "car": "",
-        "default": ["", "", ""]
-    }
-},
+    "pulseaudio": {
+        "format": "{icon} {volume}",
+        "rotate": 0,
+        "format-muted": "婢",
+        "on-click": "volumecontrol.sh -o m",
+        "on-click-right": "pavucontrol -t 3",
+        "on-click-middle": "volumecontrol.sh -s ''",
+        "on-scroll-up": "volumecontrol.sh -o i",
+        "on-scroll-down": "volumecontrol.sh -o d",
+        "tooltip-format": "{icon} {desc} // {volume}%",
+        "scroll-step": 5,
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        }
+    },
 
-"pulseaudio#microphone": {
-    "format": "{format_source}",
-    "rotate": 0,
-    "format-source": "",
-    "format-source-muted": "",
-    "on-click": "volumecontrol.sh -i m", 
-    "on-click-right": "pavucontrol -t 4",
-    "on-scroll-up": "volumecontrol.sh -i i",
-    "on-scroll-down": "volumecontrol.sh -i d",
-    "tooltip-format": "{format_source} {source_desc} // {source_volume}%",
-    "scroll-step": 5
-},
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "rotate": 0,
+        "format-source": "",
+        "format-source-muted": "",
+        "on-click": "volumecontrol.sh -i m",
+        "on-click-right": "pavucontrol -t 4",
+        "on-scroll-up": "volumecontrol.sh -i i",
+        "on-scroll-down": "volumecontrol.sh -i d",
+        "tooltip-format": "{format_source} {source_desc} // {source_volume}%",
+        "scroll-step": 5
+    },
 
     "custom/updates": {
         "exec": "systemupdate.sh",
@@ -257,7 +299,7 @@
         "on-click": "hyprctl dispatch exec 'systemupdate.sh up'",
         "interval": 86400, // once every day
         "tooltip": true,
-        "signal": 20,
+        "signal": 20
     },
     "custom/keybindhint": {
         "format": " ",
@@ -310,7 +352,7 @@
         "on-click": "sleep 0.1 && cliphist.sh c",
         "on-click-right": "sleep 0.1 && cliphist.sh d",
         "on-click-middle": "sleep 0.1 && cliphist.sh w",
-        "interval" : 86400, // once every day
+        "interval": 86400, // once every day
         "tooltip": true
     },
 
@@ -320,7 +362,7 @@
         "exec": "echo ; echo  logout",
         "on-click": "logoutlaunch.sh 2",
         "on-click-right": "logoutlaunch.sh 1",
-        "interval" : 86400, // once every day
+        "interval": 86400, // once every day
         "tooltip": true
     },
     "custom/spotify": {
@@ -351,58 +393,54 @@
         "exec": "notifications.py",
         "on-scroll-down": "sleep 0.1 && dunstctl history-pop",
         "on-click": "dunstctl set-paused toggle",
-        "on-click-middle":"dunstctl history-clear",
+        "on-click-middle": "dunstctl history-clear",
         "on-click-right": "dunstctl close-all",
         "interval": 1,
         "tooltip": true,
         "escape": true
     },
 
-
-    
-// modules for padding //
+    // modules for padding //
 
     "custom/l_end": {
         "format": " ",
-        "interval" : "once",
+        "interval": "once",
         "tooltip": false
     },
 
     "custom/r_end": {
         "format": " ",
-        "interval" : "once",
+        "interval": "once",
         "tooltip": false
     },
 
     "custom/sl_end": {
         "format": " ",
-        "interval" : "once",
+        "interval": "once",
         "tooltip": false
     },
 
     "custom/sr_end": {
         "format": " ",
-        "interval" : "once",
+        "interval": "once",
         "tooltip": false
     },
 
     "custom/rl_end": {
         "format": " ",
-        "interval" : "once",
+        "interval": "once",
         "tooltip": false
     },
 
     "custom/rr_end": {
         "format": " ",
-        "interval" : "once",
+        "interval": "once",
         "tooltip": false
     },
 
     "custom/padd": {
         "format": "  ",
-        "interval" : "once",
+        "interval": "once",
         "tooltip": false
     }
-
 }
-

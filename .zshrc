@@ -37,11 +37,14 @@ iv() {
 alias ..="cd .."
 alias ...="cd .. && cd .."
 
+alias del="gio trash"
+alias venv="virtualenv"
+alias activate="source ./.venv/bin/activate"
 
 alias -g su='sudo'
-alias -g G='| grep'
-alias -g H='| head'
-alias -g T='| tail'
+alias -g G='| grep -i'
+alias -g H='| head -n'
+alias -g T='| tail -n'
 alias -g W='| wc -l'
 alias -g C='| wl-copy'
 alias -g rp='realpath'
@@ -69,6 +72,7 @@ alias statu='systemctl --user status'
 alias c='clear'
 alias nf='fastfetch'
 alias ff='fastfetch'
+alias ex="nautilus $1 &"
 alias n='nano'
 alias sn='sudo nano'
 alias cd='z'

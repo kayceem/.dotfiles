@@ -1,0 +1,9 @@
+[Default Applications]
+x-scheme-handler/viber=viber.desktop
+image/jpeg=nsxiv.desktop
+image/png=nsxiv.desktop
+image/jpg=nsxiv.desktop
+inode/directory=org.gnome.Nautilus.desktop
+
+[Added Associations]
+application/x-zerosize=code.desktop;

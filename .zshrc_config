@@ -31,7 +31,7 @@ export KEY_CTRL_DELETE='^[[3;5~'
 export KEY_CTRL_BS=$'^H'               
 
 export KEY_CTRL_A='^A'                 
-export KEY_CTRL_C='^C'                 
+export KEY_CTRL_P='^P'                 
 export KEY_CTRL_S='^S'                 
 export KEY_CTRL_V='^V'                 
 export KEY_CTRL_X='^X'                 
@@ -59,6 +59,13 @@ function widget::paste() {
     CURSOR=$(( CURSOR + ${#pasted_text} ))
 }
 
+zle -N widget::copy
+function widget::copy() {
+    if (( REGION_ACTIVE )); then
+       zle copy-region-as-kill
+       echo "$CUTBUFFER" | wl-copy
+    fi
+}
 
 zle -N widget::cut
 function widget::cut() {
@@ -113,6 +120,7 @@ bindkey $KEY_CTRL_BS backward-kill-word
 bindkey $KEY_CTRL_DELETE kill-word
 bindkey $KEY_CTRL_A widget::select-all
 bindkey $KEY_CTRL_V widget::paste
+bindkey $KEY_CTRL_P widget::copy
 bindkey $KEY_CTRL_X widget::cut
 bindkey $KEY_CTRL_Z undo
 bindkey $KEY_CTRL_RIGHT forward-word

@@ -1,0 +1,7 @@
+[Unit]
+Description=Borg Backup Service
+
+[Service]
+Type=simple
+Environment=BORG_PASSPHRASE='Kaycee@logang1'
+ExecStart=/bin/bash /home/kayc/.local/share/bin/createbackup.sh

@@ -1,0 +1,11 @@
+[Unit]
+Description=Runs Borg Backup Service
+
+[Timer]
+OnCalendar=*:0/3
+OnBootSec=5min
+Unit=borg-backup.service
+Persistent=true
+
+[Install]
+WantedBy=timers.target

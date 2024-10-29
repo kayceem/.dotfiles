@@ -1,0 +1,22 @@
+#!/bin/env sh
+
+# Set repository and archive prefix
+REPO="/home/kayc/.backup/backup-arch-kayc"
+ARCHIVE_PREFIX="1671bc-$(date +'%Y-%m-%d_%H-%M')"
+
+EXCLUDES=(
+    --exclude '/home/kayc/.ViberPC'
+    --exclude '/home/kayc/.dotfiles'
+    --exclude '/home/kayc/.backup'
+    --exclude '/home/kayc/.vscode'
+    --exclude '/home/kayc/Code'
+    --exclude '/home/kayc/Misc'
+    --exclude '/home/kayc/Code'
+    --exclude '/home/kayc/.cache'
+    --exclude '/home/kayc/.gradle'
+    --exclude '/home/kayc/FlatpakApps'
+    --exclude '*/Steam'
+)
+
+borg create --exclude-caches "${REPO}::${ARCHIVE_PREFIX}" /home/kayc "${EXCLUDES[@]}"
+borg prune -v --list "${REPO}" --keep-hourly 3 --keep-daily 2 --keep-weekly 0 --keep-monthly 0 --keep-yearly 0

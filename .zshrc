@@ -42,6 +42,7 @@ alias venv="virtualenv"
 alias activate="source ./.venv/bin/activate"
 
 alias -g su='sudo'
+alias -g F='| fzf'
 alias -g G='| grep -i'
 alias -g H='| head -n'
 alias -g T='| tail -n'
@@ -49,7 +50,7 @@ alias -g W='| wc -l'
 alias -g C='| wl-copy'
 alias -g rp='realpath'
 
-alias p='cat'
+alias p='bat --pager "less -RF"'
 alias key='showkey -a'
 alias l='eza -lh --icons=auto'
 alias ls='eza -1 --icons=auto'
@@ -62,12 +63,13 @@ alias off='shutdown -h'
 
 alias hkey='sudo libinput debug-events'
 	
-alias jc='journalctl'
-alias sys='systemctl'
-alias sysu='systemctl --user'
-alias stat='systemctl status'
-alias statu='systemctl --user status'
+alias -g jc='journalctl'
+alias -g sys='systemctl'
+alias -g  sysu='systemctl --user'
+alias -g stat='systemctl status'
+alias -g statu='systemctl --user status'
 
+alias hc='hyprctl'
 
 alias c='clear'
 alias nf='fastfetch'
@@ -90,7 +92,8 @@ alias dep='pactree -r'
 aurhelper='yay'
 alias un='$aurhelper -Rns'
 alias up='$aurhelper -Syu'
-alias upi='$aurhelper -Qua'
+alias sync='$aurhelper -Sy'
+alias upi='$aurhelper -Qqu'
 alias in='$aurhelper -S'
 alias ins='$aurhelper -Qi'
 alias pl='$aurhelper -Qs' 
@@ -137,3 +140,9 @@ type starship_zle-keymap-select >/dev/null || \
 eval "$(zoxide init zsh)"
 
 # pokemon-colorscripts --no-title -r 1,2,3,4,5,6,7
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /home/kayc/.dart-cli-completion/zsh-config.zsh ]] && . /home/kayc/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+

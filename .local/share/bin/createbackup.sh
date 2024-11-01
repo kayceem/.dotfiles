@@ -19,4 +19,4 @@ EXCLUDES=(
 )
 
 borg create --exclude-caches "${REPO}::${ARCHIVE_PREFIX}" /home/kayc "${EXCLUDES[@]}"
-borg prune -v --list "${REPO}" --keep-hourly 3 --keep-daily 2 --keep-weekly 0 --keep-monthly 0 --keep-yearly 0
+borg prune -v --list "${REPO}" --keep-hourly 2 --keep-daily 2 --keep-weekly 0 --keep-monthly 0 --keep-yearly 0

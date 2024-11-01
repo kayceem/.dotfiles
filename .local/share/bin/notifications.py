@@ -19,19 +19,8 @@ def format_history(history):
     tooltip_click.append("󰳽 click-middle: 󰛌 clear history")
     tooltip_click.append("󰳽 click-right: 󱄊 close all")
 
-    tooltip = []
-
     if count > 0:
-        notifications = history['data'][0][:10]  # Get the first 10 notifications
-        for notification in notifications:
-            body = notification.get('body', {}).get('data', '')
-            category = notification.get('category', {}).get('data', '')
-            if category:
-                alt = category + '-notification'
-                tooltip.append(f" {body} ({category})\n")
-            else:
-                alt = 'notification'
-                tooltip.append(f" {body}\n")
+        alt = 'notification'
 
     isDND = subprocess.run(['dunstctl', 'get-pause-level'], stdout=subprocess.PIPE)
     isDND = isDND.stdout.decode('utf-8').strip()
@@ -40,15 +29,37 @@ def format_history(history):
     formatted_history = {
         "text": str(count),
         "alt": alt,
-        "tooltip": '\n '.join(tooltip_click) + '\n\n ' + '\n '.join(tooltip),
         "class": "custom-notifications"
     }
     return formatted_history
 
+def format_history_rofi(history):
+    count = len(history['data'][0])
+    formatted_history = []
+    if count > 0:
+        notifications = history['data'][0][:10]  # Get the first 10 notifications
+        for notification in notifications:
+            body = notification.get('body', {}).get('data', '')
+            category = notification.get('category', {}).get('data', '')
+            if category:
+                formatted_history.append(f" {body} ({category})")
+            else:
+                formatted_history.append(f" {body}")
+
+    return '\n'.join(formatted_history)
+
 def main():
-    history = get_dunst_history()
-    formatted_history = format_history(history)
-    sys.stdout.write(json.dumps(formatted_history) + '\n')
+    if len(sys.argv) == 2:
+        command = sys.argv[1]
+        if command == "rofi":
+            history = get_dunst_history()
+            formatted_history = format_history_rofi(history)
+            sys.stdout.write(formatted_history)
+    else:
+        history = get_dunst_history()
+        formatted_history = format_history(history)
+        sys.stdout.write(json.dumps(formatted_history) + '\n')
+
     sys.stdout.flush()
 
 if __name__ == "__main__":

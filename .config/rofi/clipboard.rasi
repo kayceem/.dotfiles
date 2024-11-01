@@ -1,4 +1,4 @@
-// Config //
+// Config clipboard.rasi //
 configuration {
     modi:                        "drun";
     show-icons:                  false;

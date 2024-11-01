@@ -1,3 +1,5 @@
 .vscode/
 swappy/
 explicit_filter.restore
+*.log
+cache/

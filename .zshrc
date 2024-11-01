@@ -34,6 +34,11 @@ iv() {
  nsxiv "$@" "$NSXIV_OPTS" -o
 }
 
+ex() {
+ local dir="${1:-$pwd}" 
+ nautilus "$dir" > /dev/null 2>&1 & disown
+}
+
 alias ..="cd .."
 alias ...="cd .. && cd .."
 
@@ -57,6 +62,7 @@ alias ls='eza -1 --icons=auto'
 alias ll='eza -lha --icons=auto --sort=name --group-directories-first'
 alias ld='eza -lhD --icons=auto'
 alias lt='eza --icons=auto --tree'
+alias sl='du -hsc * | sort -hr'
 alias grep='grep --color=auto'
 alias md='mkdir'
 alias off='shutdown -h'
@@ -74,7 +80,6 @@ alias hc='hyprctl'
 alias c='clear'
 alias nf='fastfetch'
 alias ff='fastfetch'
-alias ex="nautilus $1 &"
 alias n='nano'
 alias sn='sudo nano'
 alias cd='z'

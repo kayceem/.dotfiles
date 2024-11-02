@@ -11,14 +11,8 @@ def get_dunst_history():
 
 def format_history(history):
     count = len(history['data'][0])
+    tooltip = f"{count} notifications"
     alt = 'none'
-    tooltip_click = []
-    tooltip_click.append("󰎟 Notifications")
-    tooltip_click.append("󰳽 scroll-down:  history pop")
-    tooltip_click.append("󰳽 click-left:  Enable & Disable DND")
-    tooltip_click.append("󰳽 click-middle: 󰛌 clear history")
-    tooltip_click.append("󰳽 click-right: 󱄊 close all")
-
     if count > 0:
         alt = 'notification'
 
@@ -27,7 +21,7 @@ def format_history(history):
     if isDND != '0':
         alt = "dnd"
     formatted_history = {
-        "text": str(count),
+        "tooltip": tooltip,
         "alt": alt,
         "class": "custom-notifications"
     }

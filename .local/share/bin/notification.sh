@@ -28,4 +28,4 @@ y_off="$((${offRes[1]} - 30 ))"
 
 r_override="window{location:${x_pos} ${y_pos};anchor:${x_pos} ${y_pos};x-offset:${x_off}px;y-offset:${y_off}px;border:${border_width}px;border-radius:${wind_border}px;} wallbox{border-radius:${elem_border}px;} element{border-radius:${elem_border}px;}"
 
-notifications.py rofi | rofi -dmenu  -theme-str "${r_scale}" -theme-str "${r_override}" -config "${roconf}"
+notifications.py rofi | rofi -dmenu -theme-str "${r_scale}" -theme-str "${r_override}" -config "${roconf}"

@@ -351,9 +351,9 @@
         "format": "{}",
         "rotate": 0,
         "exec": "echo ; echo 󰅇 clipboard history",
-        "on-click": "sleep 0.1 && cliphist.sh c",
-        "on-click-right": "sleep 0.1 && cliphist.sh d",
-        "on-click-middle": "sleep 0.1 && cliphist.sh w",
+        "on-click": "pkill -x rofi || cliphist.sh History",
+        "on-click-right": "pkill -x rofi || cliphist.sh 'View Favorites'",
+        "on-click-middle": "pkill -x rofi ||  cliphist.sh 'Manage Favorites'",
         "interval": 86400, // once every day
         "tooltip": true
     },
@@ -395,8 +395,9 @@
         "exec": "notifications.py",
         "on-scroll-down": "sleep 0.1 && dunstctl history-pop",
         "on-click": "pkill -x rofi || notification.sh",
-        "on-click-middle": "dunstctl close-all",
-        "on-click-right": "dunstctl history-clear",
+        "on-click-middle": "dunstctl history-clear",
+        "on-double-click-middle": "dunstctl close-all",
+        "on-click-right": "dunstctl set-paused toggle",
         "interval": 1,
         "tooltip": true,
         "escape": true

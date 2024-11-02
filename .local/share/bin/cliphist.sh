@@ -9,6 +9,7 @@ favoritesFile="${HOME}/.cliphist_favorites"
 # Set rofi scaling
 [[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=10
 r_scale="configuration {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
+r_scale_emoji="element-text  {font: \"JetBrainsMono Nerd Font $((rofiScale+8))\";} listview{columns: 6;lines: 8;}"
 wind_border=$((hypr_border))
 elem_border=$([ $hypr_border -eq 0 ] && echo "5" || echo $hypr_border)
 
@@ -44,7 +45,7 @@ r_override="window{location:${x_pos} ${y_pos};anchor:${x_pos} ${y_pos};x-offset:
 if [ $# -eq 0 ]; then
     main_action=$(echo -e "History\nDelete\nView Favorites\nManage Favorites\nClear History" | rofi -dmenu -theme-str "entry { placeholder: \"Choose action\";}" -theme-str "${r_scale}" -theme-str "${r_override}" -config "${roconf}")
 else
-    main_action="History"
+    main_action="$1"
 fi
 
 case "${main_action}" in
@@ -54,6 +55,9 @@ case "${main_action}" in
         echo "$selected_item" | cliphist decode | wl-copy
         notify-send "Copied to clipboard." "$selected_item"
     fi
+    ;;
+"Emoji")
+    rofi -modi "emoji:rofimoji" -show emoji -theme-str "entry { placeholder: \"Search emojis...\";}" -theme-str "${r_scale_emoji}" -theme-str "${r_scale}" -theme-str "${r_override}" -config "${roconf}"
     ;;
 "Delete")
     selected_item=$(cliphist list | rofi -dmenu -theme-str "entry { placeholder: \"Delete...\";}" -theme-str "${r_scale}" -theme-str "${r_override}" -config "${roconf}")

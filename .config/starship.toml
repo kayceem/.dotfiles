@@ -16,10 +16,13 @@ $all\
 $env_var\
 $character"""
 
+right_format = """\
+$time"""
+
 ################################################
 [time]
-disabled = true
-format = '[\($time\)]($style) '
+disabled = false
+format = '[$time]($style) '
 time_format = '%H:%M'
 
 ################################################

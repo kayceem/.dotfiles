@@ -54,6 +54,8 @@ alias -g T='| tail -n'
 alias -g W='| wc -l'
 alias -g C='| wl-copy'
 alias -g rp='realpath'
+alias -g P='| bat --pager "less -RF"'
+
 
 alias p='bat --pager "less -RF"'
 alias key='showkey -a'
@@ -104,7 +106,7 @@ alias ins='$aurhelper -Qi'
 alias pl='$aurhelper -Qs' 
 alias pa='$aurhelper -Ss'
 alias pf='$aurhelper -F'
-alias pc='$aurhelper -Sc' 
+alias pc='$aurhelper -Sc --noconfirm' 
 #alias pkg='$aurhelper -Qi | awk '\''/^Name/ {name=$3} /^Install Date/ {print $4, $5, $6, $7, $8, $9, name}'\'' | sort -k3,3r -k2,2n -k1,1M -k7,7 -k6,6'
 pkg() {
     local date_filter=""

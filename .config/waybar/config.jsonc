@@ -392,7 +392,7 @@
             "none": ""
         },
         "exec-if": "which dunstctl",
-        "exec": "notifications.py",
+        "exec": "notifications.sh",
         "on-scroll-down": "sleep 0.1 && dunstctl history-pop",
         "on-click": "pkill -x rofi || notification.sh",
         "on-click-middle": "dunstctl history-clear",

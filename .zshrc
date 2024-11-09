@@ -13,7 +13,7 @@ setopt ignoreeof 	# Remove ctrl+d to exit
 export EDITOR=nano
 export DF="/home/kayc/.dotfiles"
 export CF="/home/kayc/.config"
-export NSXIV_OPTS="/home/kayc/Misc/Wallpapers"
+export NSXIV_OPTS="/home/kayc/Misc/Wallpapers/"
 
 stty -ixon
 
@@ -31,12 +31,19 @@ fd() {
 }
 
 iv() {
- nsxiv "$@" "$NSXIV_OPTS" -o
+ nsxiv "$@" -r "$NSXIV_OPTS" -o
 }
 
 ex() {
  local dir="${1:-$pwd}" 
  nautilus "$dir" > /dev/null 2>&1 & disown
+}
+__head() {
+  head -n "${1:-10}"
+}
+
+__tail() {
+  tail -n "${1:-10}"
 }
 
 alias ..="cd .."
@@ -49,8 +56,8 @@ alias activate="source ./.venv/bin/activate"
 alias -g su='sudo'
 alias -g F='| fzf'
 alias -g G='| grep -i'
-alias -g H='| head -n'
-alias -g T='| tail -n'
+alias -g H='| __head'
+alias -g T='| __tail'
 alias -g W='| wc -l'
 alias -g C='| wl-copy'
 alias -g rp='realpath'
@@ -72,12 +79,14 @@ alias off='shutdown -h'
 alias hkey='sudo libinput debug-events'
 	
 alias -g jc='journalctl'
+alias -g jcu='journalctl --user'
 alias -g sys='systemctl'
 alias -g  sysu='systemctl --user'
 alias -g stat='systemctl status'
 alias -g statu='systemctl --user status'
 
 alias hc='hyprctl'
+alias dockers='docker stop $(docker ps -q) && sudo systemctl stop docker.socket docker'
 
 alias c='clear'
 alias nf='fastfetch'

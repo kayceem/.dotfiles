@@ -1,0 +1,8 @@
+[Unit]
+Description=Automatic IPO
+
+[Service]
+Type=simple
+ExecStart=/home/kayc/Code/Python/MeroShare-IPO/ipo.py --default True
+
+

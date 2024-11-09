@@ -25,6 +25,7 @@
     st = "status"
     cm = "commit -m"
     co = "checkout"
+    bb = gitbranch.sh
 [core]
 	pager = diff-so-fancy | less --tabs=4 -RF
 [interactive]

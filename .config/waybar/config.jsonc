@@ -211,7 +211,7 @@
         "all-outputs": true,
         "active-only": false,
         "on-click": "activate",
-        "show-special": true,
+        "show-special": false,
         // "on-scroll-up": "hyprctl dispatch workspace -1",
         // "on-scroll-down": "hyprctl dispatch workspace +1",
         "persistent-workspaces": {}
@@ -232,7 +232,7 @@
             "(.*)Spotify": "Spotify 󰓇",
             "(.*)Steam": "Steam 󰓓"
         },
-        "max-length": 50
+        "max-length": 30
     },
 
     "backlight": {

@@ -108,7 +108,7 @@ alias dep='pactree -r'
 aurhelper='yay'
 alias un='$aurhelper -Rns'
 alias up='$aurhelper -Syu'
-alias sync='$aurhelper -Sy'
+alias sync='$aurhelper -Syy'
 alias upi='$aurhelper -Qu | sort'
 alias in='$aurhelper -S'
 alias ins='$aurhelper -Qi'
@@ -145,6 +145,30 @@ pkg() {
         echo "$result" | sort -k3,3r -k2,2n -k1,1M -k6,6 -k5,5
     else
         echo "No matching packages found."
+    fi
+}
+
+function hb {
+    if [ $# -eq 0 ]; then
+        echo "No file path or text specified."
+        return
+    fi
+
+    uri="http://bin.christitus.com/documents"
+    
+    if [ -f "$1" ]; then
+        content="$(cat "$1")"
+    else
+        content="$1"
+    fi
+
+    response=$(curl -s -X POST -d "$content" "$uri")
+    if [ $? -eq 0 ]; then
+        hasteKey=$(echo "$response" | jq -r '.key')
+        echo "http://bin.christitus.com/$hasteKey" | wl-copy
+        echo "http://bin.christitus.com/$hasteKey"
+    else
+        echo "Failed to upload the document."
     fi
 }
 

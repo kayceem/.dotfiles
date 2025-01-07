@@ -22,6 +22,18 @@ mcd() {
     mkdir -p "$1" && cd "$1"
 }
 
+op() {
+    xdg-open "$1" &>/dev/null &
+}
+
+off() {
+    if [[ "$1" == "off" ]]; then
+        shutdown -c
+    else
+        shutdown -h "$1"
+    fi
+}
+
 fs() {
   find . -path "./.cache" -prune -o -regex ".*$1.*"
 }
@@ -74,7 +86,6 @@ alias lt='eza --icons=auto --tree'
 alias sl='du -hsc * | sort -hr'
 alias grep='grep --color=auto'
 alias md='mkdir'
-alias off='shutdown -h'
 
 alias hkey='sudo libinput debug-events'
 	

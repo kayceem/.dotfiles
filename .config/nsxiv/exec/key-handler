@@ -29,9 +29,10 @@ rotate() {
 }
 
 case "$1" in
-"w")        while read file; do swwwallpaper.sh -s $(realpath "$file") &> /dev/null; notify-send "nsxiv" -i "$file" "Wallpaper changed"; done ;;
+"w")        while read file; do swwwallpaper.sh -s "$(realpath "$file")" &> /dev/null; notify-send "nsxiv" -i "$file" "Wallpaper changed"; done ;;
 "c")      	while read file; do wl-copy < "$file"; notify-send "nsxiv" -i "$file" "Copied image"; done ;;
 "x")      	while read file; do filePath=$(realpath "$file"); echo $filePath | wl-copy; notify-send "nsxiv" -i "$file" "Copied path: $filePath"; done ;;
+"s")		/home/kayc/.dotfiles/.config/nsxiv/nsxiv-search.sh;;
 "comma")  	rotate 270 ;;
 "period") 	rotate  90 ;;
 "slash")  	rotate 180 ;;

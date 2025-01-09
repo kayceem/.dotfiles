@@ -64,7 +64,9 @@ alias ...="cd .. && cd .."
 alias del="gio trash"
 alias venv="virtualenv"
 alias activate="source ./.venv/bin/activate"
-
+alias uvenv="uv venv"
+alias ur="uv run"
+ 
 alias -g su='sudo'
 alias -g F='| fzf'
 alias -g G='| grep -i'

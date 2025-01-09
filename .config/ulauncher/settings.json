@@ -1,0 +1,18 @@
+{
+  "arrow_key_aliases": "hjkl",
+  "base_width": 750,
+  "clear_previous_query": true,
+  "close_on_focus_out": true,
+  "daemonless": true,
+  "disable_desktop_filters": false,
+  "enable_application_mode": true,
+  "grab_mouse_pointer": false,
+  "jump_keys": "zxcv1234567890abcdefghijklmnopqrstuvwxyz",
+  "max_recent_apps": 0,
+  "raise_if_started": false,
+  "render_on_screen": "default-monitor",
+  "show_tray_icon": true,
+  "terminal_command": "kitty",
+  "theme_name": "Tokyonight-Dark",
+  "tray_icon_name": "ulauncher-indicator-symbolic"
+}

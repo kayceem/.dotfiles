@@ -2,9 +2,7 @@
 Description=Automatic Wallpaper Change Timer
 
 [Timer]
-OnBootSec=100
-OnCalendar=07:00
-Persistent=true
+OnBootSec=10
 
 [Install]
 WantedBy=timers.target

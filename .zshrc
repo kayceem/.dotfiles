@@ -61,13 +61,16 @@ __tail() {
 alias ..="cd .."
 alias ...="cd .. && cd .."
 
+alias me="sudo chmod +x"
+alias co="sudo chown"
+
 alias del="gio trash"
 alias venv="virtualenv"
 alias activate="source ./.venv/bin/activate"
 alias uvenv="uv venv"
 alias ur="uv run"
- 
-alias -g su='sudo'
+
+alias -g s='sudo'
 alias -g F='| fzf'
 alias -g G='| grep -i'
 alias -g H='| __head'
@@ -85,7 +88,7 @@ alias ls='eza -1 --icons=auto'
 alias ll='eza -lha --icons=auto --sort=name --group-directories-first'
 alias ld='eza -lhD --icons=auto'
 alias lt='eza --icons=auto --tree'
-alias sl='du -hsc * | sort -hr'
+alias sl='sudo du -hsc --threshold=1K .[^.]* * | sort -hr'
 alias grep='grep --color=auto'
 alias md='mkdir'
 
@@ -155,12 +158,12 @@ pkg() {
     result=$(eval "$base_command")
 
     if [[ -n $result ]]; then
-        echo "$result" | sort -k3,3r -k2,2n -k1,1M -k6,6 -k5,5
+        echo "$result" | sort -k4,4n -k3,3M -k2,2n -k1,1M -k6,6 -k5,5
+	#echo "$result" | sort -k3,3r -k2,2n -k1,1M -k6,6 -k5,5
     else
         echo "No matching packages found."
     fi
 }
-
 function hb {
     if [ $# -eq 0 ]; then
         echo "No file path or text specified."
@@ -199,3 +202,10 @@ eval "$(zoxide init zsh)"
 [[ -f /home/kayc/.dart-cli-completion/zsh-config.zsh ]] && . /home/kayc/.dart-cli-completion/zsh-config.zsh || true
 ## [/Completion]
 
+
+# bun completions
+[ -s "/home/kayc/.bun/_bun" ] && source "/home/kayc/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

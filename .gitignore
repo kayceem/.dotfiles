@@ -3,3 +3,7 @@ swappy/
 explicit_filter.restore
 *.log
 cache/
+icons/
+colors.conf
+theme.*
+wall.set

@@ -39,7 +39,7 @@ get_hashmap()
             return 1
         else
             echo "ERROR: No image found in any source"
-            exit 1
+            return 1
         fi
     fi
 

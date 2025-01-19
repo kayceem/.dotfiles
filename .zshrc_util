@@ -1,3 +1,129 @@
+##########
+# SYSTEM #
+##########
+
+mcd() {
+    mkdir -p "$1" && cd "$1"
+}
+
+op() {
+    xdg-open "$1" &>/dev/null &
+}
+
+off() {
+    if [[ "$1" == "off" ]]; then
+        shutdown -c
+    else
+        shutdown -h "$1"
+    fi
+}
+
+sl() {
+    local folder="${1:-.}"
+    local threshold="${2:-1M}"
+    sudo du -hac --max-depth=1 --threshold="$threshold" "$folder"/ 2>/dev/null | sort -hr | sed -E "/^\s*[0-9.]+[KMGTP]?\s+${folder//\//\\/}\/$/d; s|$folder/||g"
+}
+
+fs() {
+  find . -path "./.cache" -prune -o -regex ".*$1.*"
+}
+
+fd() {
+  find . -path "./.cache" -prune -o -type d -regex ".*$1.*"
+}
+
+iv() {
+ nsxiv "$@" -r "$NSXIV_OPTS" -o
+}
+
+ex() {
+ local dir="${1:-$pwd}"
+ nautilus "$dir" > /dev/null 2>&1 & disown
+}
+
+__head() {
+  head -n "${1:-10}"
+}
+
+__tail() {
+  tail -n "${1:-10}"
+}
+
+#############
+# UTILITIES #
+#############
+
+pkg() {
+    local date_filter=""
+    local month_filter=""
+
+    while getopts "d:m:" opt; do
+        case $opt in
+            d) date_filter="$OPTARG" ;;
+            m) month_filter="$OPTARG" ;;
+            *) return 1 ;;
+        esac
+    done
+
+     local base_command="$aurhelper -Qi | awk '/^Name/ {name=\$3} /^Install Date/ {print \$4, \$5, \$6, \$7, \$8, \$9, name}'"
+    
+    if [[ -n $date_filter ]]; then
+       base_command="$base_command | awk -v date=\"$date_filter\" '\$2 ~ date'"
+    fi
+
+    if [[ -n $month_filter ]]; then
+        base_command="$base_command | awk -v month=\"$month_filter\" '\$3 ~ month'"
+    fi
+
+    result=$(eval "$base_command")
+
+    if [[ -n $result ]]; then
+        echo "$result" | sort -k4,4n -k3,3M -k2,2n -k1,1M -k6,6 -k5,5
+        #echo "$result" | sort -k3,3r -k2,2n -k1,1M -k6,6 -k5,5
+    else
+        echo "No matching packages found."
+    fi
+}
+
+hb() {
+    if [ $# -eq 0 ]; then
+        echo "No file path or text specified."
+        return
+    fi
+
+    uri="http://bin.christitus.com/documents"
+
+    if [ -f "$1" ]; then
+        content="$(cat "$1")"
+    else
+        content="$1"
+    fi
+
+    response=$(curl -s -X POST -d "$content" "$uri")
+    if [ $? -eq 0 ]; then
+        hasteKey=$(echo "$response" | jq -r '.key')
+        echo "http://bin.christitus.com/$hasteKey" | wl-copy
+        echo "http://bin.christitus.com/$hasteKey"
+    else
+        echo "Failed to upload the document."
+    fi
+}
+
+fans() {
+   local gpu_temp=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader)
+   sensors -j | jq -r --arg gpu_temp "$gpu_temp" '
+  .["asus-isa-0000"].cpu_fan.fan1_input as $cpu_fan |
+  .["asus-isa-0000"].gpu_fan.fan2_input as $gpu_fan |
+  .["acpitz-acpi-0"].temp1.temp1_input as $cpu_temp |
+  .["amdgpu-pci-0500"].edge.temp1_input as $igpu_temp |
+"CPU Temp: \($cpu_temp | tostring | tonumber | . * 1.00 | floor / 1.00)°C
+iGPU Temp: \($igpu_temp | tostring | tonumber | . * 1.00 | floor / 1.00)°C
+CPU Fan: \($cpu_fan | tostring | tonumber | . * 1.00 | floor / 1.00)
+
+GPU Temp: \($gpu_temp)°C   |
+GPU Fan: \($gpu_fan | tostring | tonumber | . * 1.00 | floor / 1.00)"'
+}
+
 timer() {
     local seconds=0
     local sound_file="/home/kayc/Misc/Sounds/notification.wav"  # Path to the sound file

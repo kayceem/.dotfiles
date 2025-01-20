@@ -4,15 +4,15 @@
 while getopts "pbs" flag; do
   case "$flag" in
     p)
-      $(powerprofilesctl set performance)
+      $(asusctl profile -P performance)
       notify-send "Power State" "Mode changed to Performance"
       ;;
     b)
-      $(powerprofilesctl set balanced)
+      $(asusctl profile -P balanced)
       notify-send "Power State" "Mode changed to Balanced"
       ;;
     s)
-      $(powerprofilesctl set power-saver)
+      $(asusctl profile -P quiet)
       notify-send "Power State" "Mode changed to Power Saver"
       ;;
     *)

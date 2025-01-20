@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-mode="$(powerprofilesctl get)"
+mode="$(asusctl profile -p | awk 'NR==2 {print $NF}')"
 
 case "$mode" in
-  performance)
+  Performance)
     display_mode="Performance"
     ;;
-  balanced)
+  Balanced)
     display_mode="Balanced"
     ;;
-  power-saver)
+  Quiet)
     display_mode="Power Saver"
     ;;
   *)

@@ -2,6 +2,14 @@
 # SYSTEM #
 ##########
 
+p() {
+    if [ "$(bat --paging=never "$@" 2>/dev/null | wc -l)" -gt "$(tput lines)" ]; then
+        bat --pager "less -RF +G" "$@"
+    else
+        bat --pager "less -RF" "$@"
+    fi
+}
+
 mcd() {
     mkdir -p "$1" && cd "$1"
 }
@@ -52,6 +60,9 @@ __tail() {
 #############
 # UTILITIES #
 #############
+
+alias cfi="sudo cpupower frequency-info"
+alias cfs="sudo cpupower frequency-set"
 
 pkg() {
     local date_filter=""
@@ -108,6 +119,44 @@ hb() {
         echo "Failed to upload the document."
     fi
 }
+
+gf() {
+    if [ "$#" -ne 1 ]; then
+        echo "Usage: upload_to_gofile <file>"
+        return 1
+    fi
+
+    local file="$1"
+
+    if [ ! -f "$file" ]; then
+        echo "Error: File '$file' not found."
+        return 1
+    fi
+
+    local server_response
+    server_response=$(curl -s https://api.gofile.io/servers)
+
+    local server_name
+    server_name=$(echo "$server_response" | jq -r '.data.servers[0].name')
+
+    if [ -z "$server_name" ]; then
+        echo "Error: Failed to fetch server name."
+        return 1
+    fi
+
+    local upload_url="https://${server_name}.gofile.io/uploadFile"
+    local upload_response
+    upload_response=$(curl -s -X POST "$upload_url" \
+        -H "Content-Type: multipart/form-data" \
+        -F "file=@$file")
+
+    link=$(echo "$upload_response" | jq -r '.data.downloadPage')
+    token=$(echo "$upload_response" | jq -r '.data.guestToken')
+    echo "$token" | wl-copy
+    echo "$link" | wl-copy
+    echo "$link"
+}
+
 
 fans() {
    local gpu_temp=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader)

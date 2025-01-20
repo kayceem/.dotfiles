@@ -41,7 +41,7 @@ alias -g rp='realpath'
 alias -g P='| bat --pager "less -RF +G"'
 
 
-alias p='bat --pager "less -RF +G"'
+#alias p='bat --pager "less -RF +G"'
 alias key='showkey -a'
 alias l='eza -1 --icons=auto'
 alias ls='eza -lh --icons=auto --sort=name'

@@ -81,8 +81,8 @@
         "menu-file": "/home/kayc/.config/waybar/powerprofiles_menu.xml",
         "menu-actions": {
             "Performance": "changepowerprofile.sh -p",
-            "Balanced": "changepowerprofile.sh -b",
-            "Power-Saver": "changepowerprofile.sh -s"
+            "Power-Saver": "changepowerprofile.sh -s",
+            "Reset": "changepowerprofile.sh -r"
         }
     },
 

@@ -16,6 +16,7 @@ EXCLUDES=(
     --exclude '/home/kayc/.cache'
     --exclude '/home/kayc/.gradle'
     --exclude '/home/kayc/FlatpakApps'
+    --exclude '/home/kayc/.lmstudio'
     --exclude '*/waydroid'
     --exclude '*/uv'
     --exclude '*/.docker'

@@ -4,9 +4,9 @@
 
 p() {
     if [ "$(bat --paging=never "$@" 2>/dev/null | wc -l)" -gt "$(tput lines)" ]; then
-        bat --pager "less -RF +G" "$@"
+        sudo bat --pager "less -RF +G" "$@"
     else
-        bat --pager "less -RF" "$@"
+       sudo bat --pager "less -RF" "$@"
     fi
 }
 
@@ -169,7 +169,7 @@ fans() {
 iGPU Temp: \($igpu_temp | tostring | tonumber | . * 1.00 | floor / 1.00)°C
 CPU Fan: \($cpu_fan | tostring | tonumber | . * 1.00 | floor / 1.00)
 
-GPU Temp: \($gpu_temp)°C   |
+GPU Temp: \($gpu_temp)°C
 GPU Fan: \($gpu_fan | tostring | tonumber | . * 1.00 | floor / 1.00)"'
 }
 
@@ -198,3 +198,8 @@ timer() {
         notify-send \"Timer\" \"Time's up!\"
     }" < /dev/null > /dev/null 2>&1
 }
+
+alias gces="TERM=xterm ssh gces"
+alias jss="ssh gces 'source /home/mohankc/Code/.venv/bin/activate && nohup jupyter server --no-browser --port=6890 > jupyter.log 2>&1 &'"
+alias jsk="ssh gces 'pkill -e -u mohankc jupyter'"
+alias jsc="ssh gces 'ps aux | grep \"mohankc.*jupyter\"'"

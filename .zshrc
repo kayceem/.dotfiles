@@ -14,6 +14,7 @@ export EDITOR=nano
 export DF="/home/kayc/.dotfiles"
 export CF="/home/kayc/.config"
 export NSXIV_OPTS="/home/kayc/Misc/Wallpapers/"
+export aurhelper='yay'
 
 stty -ixon
 
@@ -22,6 +23,8 @@ alias ...="cd .. && cd .."
 
 alias me="sudo chmod +x"
 alias co="sudo chown"
+alias cm="sudo chmod"
+alias rd="sudo !!"
 
 alias del="gio trash"
 alias venv="virtualenv"
@@ -52,6 +55,10 @@ alias grep='grep --color=auto'
 alias md='mkdir'
 
 alias hkey='sudo libinput debug-events'
+
+alias -g af="auto-cpufreq"
+alias acf="asusctl fan-curve"
+alias acp="asusctl profile"
 	
 alias -g jc='journalctl -e'
 alias -g jcu='journalctl --user -e'
@@ -82,7 +89,6 @@ alias r='source ~/.zshrc'
 alias rr='clear && source ~/.zshrc'
 
 alias dep='pactree -r'
-aurhelper='yay'
 alias un='$aurhelper -Rns'
 alias up='$aurhelper -Syu'
 alias sync='$aurhelper -Syy'
@@ -104,7 +110,3 @@ eval "$(zoxide init zsh)"
 
 # pokemon-colorscripts --no-title -r 1,2,3,4,5,6,7
 
-## [Completion]
-## Completion scripts setup. Remove the following line to uninstall
-[[ -f /home/kayc/.dart-cli-completion/zsh-config.zsh ]] && . /home/kayc/.dart-cli-completion/zsh-config.zsh || true
-## [/Completion]

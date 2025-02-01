@@ -52,7 +52,7 @@ case "${main_action}" in
 "History")
     selected_item=$(cliphist list | rofi -dmenu -theme-str "entry { placeholder: \"History...\";}" -theme-str "${r_scale}" -theme-str "${r_override}" -config "${roconf}")
     if [ -n "$selected_item" ]; then
-        echo "$selected_item" | cliphist decode | wl-copy && wtype -M ctrl -k v -m ctrl
+        echo "$selected_item" | cliphist decode | wl-copy && wtype -M ctrl -M shift -k v -m shift -m ctrl
         # notify-send "Copied to clipboard." "$selected_item"
     fi
     ;;

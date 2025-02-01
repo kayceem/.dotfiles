@@ -12,7 +12,7 @@ EXCLUDES=(
     --exclude '/home/kayc/.vscode-root'
     --exclude '/home/kayc/Code'
     --exclude '/home/kayc/Misc'
-    --exclude '/home/kayc/Code'
+    --exclude '/home/kayc/Downloads'
     --exclude '/home/kayc/.cache'
     --exclude '/home/kayc/.gradle'
     --exclude '/home/kayc/FlatpakApps'

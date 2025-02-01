@@ -70,7 +70,7 @@ alias -g statu='systemctl --user status'
 alias hc='hyprctl'
 alias dockeru='sudo systemctl start docker'
 alias dockers='docker stop $(docker ps -q) && sudo systemctl stop docker.socket docker'
-alias waydroids='waydroid session stop && sudo waydroid container stop && sudo systemctl stop waydroid-container'
+alias waydroids='waydroid session stop && sudo waydroid container stop && sudo systemctl stop waydroid-container && for file in /home/kayc/.local/share/applications/waydroid.*.desktop; do mv "$file" "$file.bak"; done'
 
 alias c='clear'
 alias nf='fastfetch'

@@ -200,6 +200,4 @@ timer() {
 }
 
 alias gces="TERM=xterm ssh gces"
-alias jss="ssh gces 'source /home/mohankc/Code/.venv/bin/activate && nohup jupyter server --no-browser --port=6890 > jupyter.log 2>&1 &'"
-alias jsk="ssh gces 'pkill -e -u mohankc jupyter'"
-alias jsc="ssh gces 'ps aux | grep \"mohankc.*jupyter\"'"
+alias link="ssh -NfL 6890:localhost:6890 gces"

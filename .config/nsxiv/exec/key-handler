@@ -27,6 +27,13 @@ rotate() {
 		esac
 	done
 }
+crop() {
+    while IFS= read -r file; do
+        realpath -- "$file"
+    done | sort | uniq | while IFS= read -r file; do
+        convert "$file" -crop "$1" +repage "$file"
+    done
+}
 
 case "$1" in
 "w")        while read file; do swwwallpaper.sh -s "$(realpath "$file")" &> /dev/null; notify-send "nsxiv" -i "$file" "Wallpaper changed"; done ;;
@@ -35,6 +42,10 @@ case "$1" in
 "comma")  	rotate 270 ;;
 "period") 	rotate  90 ;;
 "slash")  	rotate 180 ;;
+"C-apostrophe")  crop "-0-99%" ;;
+"C-semicolon")   crop "+0+99%";;
+"M-apostrophe")  crop "-99%-0";;
+"M-semicolon")   crop "+99%+0" ;;
 esac
 exit
 

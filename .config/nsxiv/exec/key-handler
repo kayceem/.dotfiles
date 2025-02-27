@@ -34,8 +34,36 @@ crop() {
         convert "$file" -crop "$1" +repage "$file"
     done
 }
+rename_file() {
+    while IFS= read -r file; do
+        dir=$(dirname "$file")
+        base=$(basename "$file")
+
+        # window_id=$(xdotool getwindowfocus) 
+        window_id=$(xdotool getactivewindow) 
+
+        newname=$(printf "%s" "$base" | dmenu -p 'Rename:' -l 1 -fn 'monospace-14' -nb '#222222' -nf '#ffffff' -sb '#005577' -sf '#ffffff' -w $window_id)
+
+        if [ -z "$newname" ]; then
+            notify-send "Exit"
+            return
+        fi
+        ext="${newname##*.}"
+        if [[ "$ext" != "jpg" && "$ext" != "png" ]]; then
+            newname="$newname.$ext"
+        fi
+
+        if [ -n "$newname" ] && [ ! -e "$dir/$newname" ]; then
+            mv "$file" "$dir/$newname"
+            notify-send "nsxiv" "Renamed $base to $newname"
+        else
+            notify-send "nsxiv" "Invalid name or file exists!"
+        fi
+    done
+}
 
 case "$1" in
+"r")        rename_file ;;
 "w")        while read file; do swwwallpaper.sh -s "$(realpath "$file")" &> /dev/null; notify-send "nsxiv" -i "$file" "Wallpaper changed"; done ;;
 "c")      	while read file; do wl-copy < "$file"; notify-send "nsxiv" -i "$file" "Copied image"; done ;;
 "x")      	while read file; do filePath=$(realpath "$file"); echo $filePath | wl-copy; notify-send "nsxiv" -i "$file" "Copied path: $filePath"; done ;;

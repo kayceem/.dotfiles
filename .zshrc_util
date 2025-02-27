@@ -33,11 +33,11 @@ sl() {
 }
 
 fs() {
-  find . -path "./.cache" -prune -o -regex ".*$1.*"
+     sudo find . -path "./.cache" -prune -o -regex ".*$1.*"
 }
 
 fd() {
-  find . -path "./.cache" -prune -o -type d -regex ".*$1.*"
+  sudo find . -path "./.cache" -prune -o -type d -regex ".*$1.*"
 }
 
 iv() {
@@ -113,8 +113,8 @@ hb() {
     response=$(curl -s -X POST -d "$content" "$uri")
     if [ $? -eq 0 ]; then
         hasteKey=$(echo "$response" | jq -r '.key')
-        echo "http://bin.christitus.com/$hasteKey" | wl-copy
-        echo "http://bin.christitus.com/$hasteKey"
+        echo "http://bin.christitus.com/raw/$hasteKey" | wl-copy
+        echo "http://bin.christitus.com/raw/$hasteKey"
     else
         echo "Failed to upload the document."
     fi
@@ -201,3 +201,7 @@ timer() {
 
 alias gces="TERM=xterm ssh gces"
 alias link="ssh -NfL 6890:localhost:6890 gces"
+alias ports="netstat -tuln"
+alias portsa="sudo lsof -i -P -n | grep LISTEN"
+
+

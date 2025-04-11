@@ -1,3 +1,12 @@
+players = []
+
+def __resume_players(players):
+    """
+    Resume all playing media players using dbus.
+    """
+    for player in players:
+        player.Play()
+
 def on_start_break(break_obj):
     """
     Lifecycle method executes just before the break.

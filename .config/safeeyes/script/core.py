@@ -3,7 +3,7 @@
         Show the notification and start the break after the notification.
         """
         self.context['state'] = State.PRE_BREAK
-        if utility.check_fullscreen():
+        if utility.check_idle() or (not is_long_break and (utility.check_fullscreen() or utility.check_gaming())):
             logging.info("Skip the break because of full screen application")
             self.__start_next_break()
             return

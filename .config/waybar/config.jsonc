@@ -180,7 +180,7 @@
     },
 
     "clock": {
-        "format": "{:%H:%M 󰃭 }",
+        "format": "{:%A %H:%M 󰃭 }",
         "rotate": 0,
         "format-alt": "{:%R %d·%m·%y}",
         // https://docs.gtk.org/Pango/pango_markup.html

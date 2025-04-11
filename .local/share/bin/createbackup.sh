@@ -6,11 +6,14 @@ ARCHIVE_PREFIX="1671bc-$(date +'%Y-%m-%d_%H-%M')"
 
 EXCLUDES=(
     --exclude '/home/kayc/.*'
+    --exclude '/home/kayc/.var'
+    --exclude '/home/kayc/.local'
     --exclude '/home/kayc/Code'
     --exclude '/home/kayc/Misc'
     --exclude '/home/kayc/Downloads'
     --exclude '/home/kayc/School'
     --exclude '/home/kayc/Games'
+    --exclude '/home/kayc/Public'
     --exclude '/home/kayc/FlatpakApps'
     --exclude '*/waydroid'
     --exclude '*/uv'

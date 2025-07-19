@@ -16,6 +16,10 @@ export CF="/home/kayc/.config"
 export NSXIV_OPTS="/home/kayc/Misc/Wallpapers/"
 export aurhelper='yay'
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 stty -ixon
 
 alias ..="cd .."

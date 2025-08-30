@@ -43,6 +43,7 @@ EOF
 
 notify_vol() {
     angle=$(( (($vol + 2) / 5) * 5 ))
+    [ "$angle" -gt 100 ] && angle=100
     ico="${icodir}/vol-${angle}.svg"
     bar=$(seq -s "." $(($vol / 15)) | sed 's/[0-9]//g')
     notify-send -a "t2" -r 91190 -t 800 -i "${ico}" "${vol}${bar}" "${nsink}"
@@ -70,7 +71,8 @@ change_volume() {
     case $device in
         "pamixer")            
             $use_swayosd && swayosd-client ${mode} "${delta}${step}"  && exit 0
-            pamixer $srce -"$action" "$step"
+            [ "$action" = "i" ] && [ $(($(pamixer $srce --get-volume) + step)) -gt 120 ] && return
+            pamixer --allow-boost $srce -"$action" "$step"
             vol=$(pamixer $srce --get-volume)
             ;;
         "playerctl")

@@ -8,3 +8,4 @@ colors.conf
 theme.*
 wall.set
 jd2
+timers.target.wants/

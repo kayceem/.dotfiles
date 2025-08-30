@@ -33,7 +33,8 @@ sl() {
 }
 
 fs() {
-     sudo find . -path "./.cache" -prune -o -regex ".*$1.*"
+    sudo fd --type f --exclude .cache | sudo fzf --query="$1"
+#     sudo find . -path "./.cache" -prune -o -regex ".*$1.*"
 }
 
 fd() {

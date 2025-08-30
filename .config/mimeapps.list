@@ -6,6 +6,16 @@ image/jpg=nsxiv.desktop
 inode/directory=org.gnome.Nautilus.desktop
 x-scheme-handler/mailto=microsoft-edge.desktop
 application/pdf=microsoft-edge.desktop
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet=onlyoffice-desktopeditors.desktop
+text/csv=onlyoffice-desktopeditors.desktop
+text/x-python=code.desktop
+text/plain=firefox.desktop
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=onlyoffice-desktopeditors.desktop
 
 [Added Associations]
 application/x-zerosize=code.desktop;
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet=onlyoffice-desktopeditors.desktop;
+text/csv=onlyoffice-desktopeditors.desktop;
+text/x-python=code.desktop;
+text/plain=firefox.desktop;
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=onlyoffice-desktopeditors.desktop;

@@ -1,0 +1,2 @@
+ACTION=="change", SUBSYSTEM=="power_supply", KERNEL=="ADP0", ATTR{online}=="1", RUN+="/home/kayc/.local/share/bin/changerefreshrate.sh 300 &>/dev/null"
+ACTION=="change", SUBSYSTEM=="power_supply", KERNEL=="ADP0", ATTR{online}=="0", RUN+="/home/kayc/.local/share/bin/changerefreshrate.sh 60 &>/dev/null"

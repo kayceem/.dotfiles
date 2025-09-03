@@ -10,6 +10,7 @@ setopt SHARE_HISTORY
 setopt HIST_IGNORE_DUPS
 setopt ignoreeof 	# Remove ctrl+d to exit
 
+export PATH="$PATH:/home/$USER/.local/share/bin"
 export EDITOR=nano
 export DF="/home/kayc/.dotfiles"
 export CF="/home/kayc/.config"

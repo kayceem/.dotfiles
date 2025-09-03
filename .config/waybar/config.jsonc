@@ -264,15 +264,15 @@
     },
 
     "pulseaudio": {
-        "format": "{icon} {volume}",
+        "format": "{icon}  {volume}",
         "rotate": 0,
-        "format-muted": "婢",
+        "format-muted": " ",
         "on-click": "volumecontrol.sh -o m",
         "on-click-right": "pavucontrol -t 3",
         "on-click-middle": "volumecontrol.sh -s ''",
         "on-scroll-up": "volumecontrol.sh -o i",
         "on-scroll-down": "volumecontrol.sh -o d",
-        "tooltip-format": "{icon} {desc} // {volume}%",
+        "tooltip-format": "{icon}  {desc} // {volume}%",
         "scroll-step": 5,
         "format-icons": {
             "headphone": "",
@@ -288,7 +288,7 @@
     "pulseaudio#microphone": {
         "format": "{format_source}",
         "rotate": 0,
-        "format-source": "",
+        "format-source": "",
         "format-source-muted": "",
         "on-click": "volumecontrol.sh -i m",
         "on-click-right": "pavucontrol -t 4",
@@ -335,7 +335,7 @@
     "tray": {
         "icon-size": 16,
         "rotate": 0,
-        "spacing": 5
+        "spacing": 10
     },
 
     "battery": {
